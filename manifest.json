@@ -1,0 +1,39 @@
+{
+
+    "manifest_version": 2,
+    "name": "SR-ext",
+    "version": "1.0",
+    "default_locale": "en",
+    "browser_specific_settings": {
+    "gecko": {
+      "strict_min_version": "56.0a1"
+        }
+    },
+    "description": "Adds a red border to all webpages matching mozilla.org.",
+    "icons": {
+        "32": "icons/book32.png"
+      },
+
+  
+    "content_scripts": [
+      {
+        "matches": ["*://*.mozilla.org/*"],
+        "js": ["sr.js"]
+      }
+    ],
+
+    "background": {
+        "scripts": ["background.js"]
+      },
+
+    "permissions": [
+        "menus",
+        "contextMenus",
+        "clipboardWrite"],
+
+        "sidebar_action": {
+            "default_title" : "My Cards",
+            "default_panel": "sidebar/sidebar.html"
+          }
+  
+  }

@@ -1,0 +1,17 @@
+{
+    "menuItemSelectionLogger": {
+      "message": "Log '%s' to the browser console",
+      "description": "Title of context menu item that logs the selected text when clicked."
+    },
+  
+    "menuAddCard": {
+      "message": "Add new Card",
+      "description": "create a new card back"
+    },
+
+    "menuAddCardSelection": {
+      "message": "Add selected new Card",
+      "description": "add the text selected to a new card back"
+    }
+  
+  }
