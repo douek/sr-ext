@@ -14,7 +14,10 @@
         "32": "icons/book32.png"
       },
 
-  
+      "background": {
+        "scripts": ["background.js"]
+      },
+      
     "content_scripts": [
       {
         "matches": ["*://*.mozilla.org/*"],
@@ -22,18 +25,21 @@
       }
     ],
 
-    "background": {
-        "scripts": ["background.js"]
-      },
 
     "permissions": [
         "menus",
         "contextMenus",
-        "clipboardWrite"],
+        "clipboardWrite",
+        "tabs"],
 
-        "sidebar_action": {
-            "default_title" : "My Cards",
-            "default_panel": "sidebar/sidebar.html"
-          }
+        "browser_action": {
+            "default_icon": {
+              "64": "icons/book32.png"
+            },
+            "default_title": "Spaced Repetition",
+            "default_popup": "popupCard.html"
+          },
+
+          "web_accessible_resources": ["modal.html"]
   
   }

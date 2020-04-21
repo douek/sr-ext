@@ -1,3 +1,4 @@
+
 /*
 Called when the item has been created, or when creation failed due to an error.
 We'll just log success/failure here.
@@ -33,14 +34,12 @@ function onCreated() {
     id: "add_card_selection",
     title: browser.i18n.getMessage("menuAddCardSelection"),
     contexts: ["selection"],
-    command: "_execute_sidebar_action"
   }, onCreated);
 
   browser.menus.create({
     id: "add_card_all",
     title: browser.i18n.getMessage("menuAddCard"),
     contexts: ["all"],
-    command: "_execute_sidebar_action"
   }, onCreated);
   
 
@@ -49,13 +48,46 @@ function onCreated() {
   ID of the menu item that was clicked.
   */
   browser.menus.onClicked.addListener((info, tab) => {
+    console.log(info)
     switch (info.menuItemId) {
       case "add_card_selection":
         console.log(info.selectionText);
+        //browser.sidebarAction.open();
+        //console.log("finish open side bar");
+        sidebarMessage(info, tab)
+        //console.log("after send message");
         break;
       case "add_card_all":
         console.log("Clickk");
+        //browser.sidebarAction.open()
+        browser.tab.create({url:"sidebar/sidebar.html"})
         break;
     }
   });
   
+    /*
+  The click event listener, where we perform the appropriate action given the
+  ID of the menu item that was clicked.
+  */
+ browser.browserAction.onClicked.addListener((info) => {
+    console.log(info)
+    browser.pageAction.show()
+  });
+
+  function sidebarMessage(info) {
+    var sending = browser.runtime.sendMessage({
+        selected: info.selectionText,
+        url: info.pageUrl
+      });
+    sending.then(handleResponse, handleError);  
+  }
+
+  function handleResponse(message) {
+    console.log(`Message from the sidebar script:  ${message.response}`);
+  }
+  
+  function handleError(error) {
+    console.log(`Error: ${error}`);
+  }
+
+
